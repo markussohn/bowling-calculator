@@ -23,4 +23,14 @@ public class BowlingCalculatorTest {
         }
         assertEquals(40, doRoll.getResult());
     }
+
+    @Test
+    public void canWeRollOneSpare(){
+        doRoll.roll(8);
+        doRoll.roll(2);
+        doRoll.roll(5);
+        assertEquals(20, doRoll.getResult());
+    }
+
+
 }
