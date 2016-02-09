@@ -32,5 +32,16 @@ public class BowlingCalculatorTest {
         assertEquals(20, doRoll.getResult());
     }
 
+    @Test
+    public void canWeRollThreeSparesInARow(){
+        doRoll.roll(8);
+        doRoll.roll(2); //15
+        doRoll.roll(5);
+        doRoll.roll(5); //32
+        doRoll.roll(7);
+        doRoll.roll(3); //48
+        doRoll.roll(6);
+        assertEquals(54, doRoll.getResult());
+    }
 
 }
