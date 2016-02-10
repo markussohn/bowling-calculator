@@ -12,7 +12,11 @@ public class BowlingCalculator {
         int totalScore = 0;
         int i = 0;
         for (int frame = 0; frame < 10; frame++) {
-            if (rollingResults[i] + rollingResults[i + 1] == 10){
+            if (rollingResults[i] == 10){
+                totalScore += 10 + rollingResults[i + 1] + rollingResults[i + 2];
+                i += 1;
+            }
+            else if (rollingResults[i] + rollingResults[i + 1] == 10){
                 totalScore += 10 + rollingResults[i + 2];
                 i += 2;
             }

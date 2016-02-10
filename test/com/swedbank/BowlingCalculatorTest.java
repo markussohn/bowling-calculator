@@ -44,4 +44,12 @@ public class BowlingCalculatorTest {
         assertEquals(54, doRoll.getResult());
     }
 
+    @Test
+    public void canWeRollStrike() {
+        doRoll.roll(10);
+        doRoll.roll(5);
+        doRoll.roll(4);
+        assertEquals(28, doRoll.getResult());
+    }
+
 }
