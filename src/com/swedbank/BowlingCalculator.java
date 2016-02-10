@@ -10,22 +10,38 @@ public class BowlingCalculator {
     }
     public int getResult(){
         int totalScore = 0;
-        int i = 0;
+        int firstOfFrame = 0;
         for (int frame = 0; frame < 10; frame++) {
-            if (rollingResults[i] == 10){
-                totalScore += 10 + rollingResults[i + 1] + rollingResults[i + 2];
-                i += 1;
+            if (ifStrikeScored(firstOfFrame)){
+                totalScore += 10 + rollingResults[firstOfFrame + 1] + rollingResults[firstOfFrame + 2];
+                firstOfFrame += 1;
             }
-            else if (rollingResults[i] + rollingResults[i + 1] == 10){
-                totalScore += 10 + rollingResults[i + 2];
-                i += 2;
+            else if (ifSpareScored(firstOfFrame)){
+                totalScore += scoreOfSpare(firstOfFrame);
+                firstOfFrame += 2;
             }
             else {
-                totalScore += rollingResults[i] + rollingResults[i + 1];
-                i += 2;
+                totalScore += scoreOfTwoRolls(firstOfFrame);
+                firstOfFrame += 2;
             }
 
         }
         return totalScore;
+    }
+
+    public int scoreOfSpare(int firstOfFrame) {
+        return 10 + rollingResults[firstOfFrame + 2];
+    }
+
+    public int scoreOfTwoRolls(int firstOfFrame) {
+        return rollingResults[firstOfFrame] + rollingResults[firstOfFrame + 1];
+    }
+
+    public boolean ifSpareScored(int firstOfFrame) {
+        return rollingResults[firstOfFrame] + rollingResults[firstOfFrame + 1] == 10;
+    }
+
+    public boolean ifStrikeScored(int firstOfFrame) {
+        return rollingResults[firstOfFrame] == 10;
     }
 }

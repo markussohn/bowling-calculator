@@ -8,47 +8,47 @@ public class BowlingCalculatorTest {
 
     private BowlingCalculator doRoll = new BowlingCalculator();
 
+    public void rollManyTimes(int numberOfRolls, int numberOfPins) {
+        for (int i = 0; i < numberOfRolls; i++) {
+            doRoll.roll(numberOfPins);
+        }
+    }
+
+    public void rollSpare(int score, int score2) {
+        doRoll.roll(score);
+        doRoll.roll(score2);
+    }
+
+    public void rollStrike(int score) {
+        doRoll.roll(score);
+    }
+
     @Test
     public void canWeRollOneTwentyTimes(){
-        for (int i = 0; i < 20; i++) {
-            doRoll.roll(1);
-        }
+        rollManyTimes(20, 1);
         assertEquals(20, doRoll.getResult());
     }
 
     @Test
     public void canWeRollTwoTwentyTimes(){
-        for (int i = 0; i < 20; i++) {
-            doRoll.roll(2);
-        }
+        rollManyTimes(20, 2);
         assertEquals(40, doRoll.getResult());
     }
 
     @Test
     public void canWeRollOneSpare(){
-        doRoll.roll(8);
-        doRoll.roll(2);
+        rollSpare(8, 2);
         doRoll.roll(5);
+        rollManyTimes(17, 0);
         assertEquals(20, doRoll.getResult());
     }
 
     @Test
-    public void canWeRollThreeSparesInARow(){
-        doRoll.roll(8);
-        doRoll.roll(2); //15
-        doRoll.roll(5);
-        doRoll.roll(5); //32
-        doRoll.roll(7);
-        doRoll.roll(3); //48
-        doRoll.roll(6);
-        assertEquals(54, doRoll.getResult());
-    }
-
-    @Test
     public void canWeRollStrike() {
-        doRoll.roll(10);
+        rollStrike(10);
         doRoll.roll(5);
         doRoll.roll(4);
+        rollManyTimes(16, 0);
         assertEquals(28, doRoll.getResult());
     }
 
